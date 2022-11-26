@@ -28,6 +28,16 @@ void testConstructor1Invalid2() {
 
 	}
 
+void testConstructor1ValidSabeer() {
+    int valid_row = 5, valid_col = 5;
+    string row1="0 0 0 0 0 \n", row2="0 0 0 0 0 \n",row3="0 0 0 0 0 \n",row4="0 0 0 0 0 \n",row5="0 0 0 0 0 \n";
+    string expected=row1+row2+row3+row4+row5;
+	Matrix d = Matrix(valid_row,valid_col);
+
+        ASSERT_EQUAL(expected,d.toString());
+
+	}
+
 void testConstructor1Valid() {
     int valid_row = 3, valid_col = 4;
 		// test constructor1; valid inputs
@@ -38,6 +48,22 @@ void testConstructor1Valid() {
         ASSERT_EQUAL(expected,d.toString());
 
 	}
+
+void testConstructor2Sabeer() {
+	  // for constructor2
+	    int row=5,col=5;
+        int data[5][5] = {{2,2,2,5,5},{6,6,6,9,9},{0,0,0,2,2},{4,4,4,5,5},{9,9,9,3,3}};
+        int*input_data[5];
+        for (int i=0;i<5;i++){
+        	input_data[i]=data[i];
+        }
+		Matrix f =  Matrix(row,col,input_data);
+
+	    string row1="2 2 2 5 5 \n", row2="6 6 6 9 9 \n", row3="0 0 0 2 2 \n",row4="4 4 4 5 5 \n",row5="9 9 9 3 3 \n";
+	    string expected=row1+row2+row3+row4+row5;
+        ASSERT_EQUAL(expected,f.toString());
+
+}
 
 void testConstructor2() {
 	  // for constructor2
@@ -53,6 +79,20 @@ void testConstructor2() {
 	    string expected=row1+row2+row3+row4;
         ASSERT_EQUAL(expected,f.toString());
 
+}
+
+void testGetElementValidSabeer() {
+	  // for constructor2
+    int row=5,col=5;
+    int data[5][5] = {{2,2,2,5,5},{6,6,6,9,9},{0,0,0,2,2},{4,4,4,5,5},{9,9,9,3,3}};
+    int*input_data[5];
+    for (int i=0;i<5;i++){
+    	input_data[i]=data[i];
+    }
+	Matrix f =  Matrix(row,col,input_data);
+
+		int expected= 3;
+        ASSERT_EQUAL(expected,f.getElement(4, 4));
 }
 
 void testGetElementValid() {
@@ -113,6 +153,24 @@ void testSetElementValid() {
 
 	}
 
+void testSetElementValidSabeer() {
+	  int value = 111;
+	  int setvalid_row = 1, setvalid_col = 1;
+	    int row=5,col=5;
+	    int data[5][5] = {{2,2,2,5,5},{6,6,6,9,9},{0,0,0,2,2},{4,4,4,5,5},{9,9,9,3,3}};
+	    int*input_data[5];
+	    for (int i=0;i<5;i++){
+	    	input_data[i]=data[i];
+	    }
+		Matrix f =  Matrix(row,col,input_data);
+	  bool check = f.setElement(value,setvalid_row,setvalid_col);
+	  string row1="2 2 2 5 5 \n", row2="6 111 6 9 9 \n", row3="0 0 0 2 2 \n",row4="4 4 4 5 5 \n",row5="9 9 9 3 3 \n";
+	  string expected=row1+row2+row3+row4+row5;
+
+      ASSERT_EQUAL(expected,f.toString());
+      ASSERT_EQUAL(true,check);
+
+	}
 
 
 void testSetElementInvalid() {
@@ -145,6 +203,21 @@ void testCopy() {
     Matrix copied = origin.copy(); // make a copy
 	string row1="1 2 3 4 5 \n", row2="6 7 8 9 0 \n", row3="0 0 1 2 3 \n",row4="0 0 0 4 5 \n";
 	string expected=row1+row2+row3+row4;
+    ASSERT_EQUAL(expected,copied.toString());
+}
+
+void testCopySabeer() {
+
+	int row=5,col=5;
+    int data[5][5] = {{2,2,2,5,5},{6,6,6,9,9},{0,0,0,2,2},{4,4,4,5,5},{9,9,9,3,3}};
+	int*input_data[5];
+	for (int i=0;i<5;i++){
+	    	input_data[i]=data[i];
+	}
+	Matrix origin =  Matrix(row,col,input_data);
+    Matrix copied = origin.copy();
+	string row1="2 2 2 5 5 \n", row2="6 6 6 9 9 \n", row3="0 0 0 2 2 \n",row4="4 4 4 5 5 \n",row5="9 9 9 3 3 \n";
+	string expected=row1+row2+row3+row4+row5;
     ASSERT_EQUAL(expected,copied.toString());
 }
 
@@ -221,7 +294,38 @@ void testAddToValid() {
 
 }
 
+void testAddToValidSabeer() {
+	   int add_to_data[4][4] = {{4,5,6,3}, {0,1,2,3}, {1,1,1,1},{2,2,2,2}};
+	   int add_to_above[4][4] = {{5,3,-2,-3}, {3,2,2,5}, {3,3,3,3},{-1,-1,-1,-1}};
+	   int row=4;int col=4;
 
+	   int*input_data[4];
+	   for (int i=0;i<4;i++){
+	 	    	input_data[i]=add_to_data[i];
+	   }
+	   Matrix m =  Matrix(row,col,input_data);
+
+	   for (int i=0;i<4;i++){
+	 	    	input_data[i]=add_to_above[i];
+	   }
+	   Matrix m1 =  Matrix(row,col,input_data);
+	   string row1="9 8 4 0 \n", row2="3 3 4 8 \n", row3="4 4 4 4 \n",row4="1 1 1 1 \n";
+       string expected = row1+row2+row3+row4;
+
+
+
+      try{
+        m.addTo(m1);
+        ASSERT_EQUAL(expected,m.toString());
+
+      }
+    catch (const std::invalid_argument& e) {
+	   std::cerr << "supposed to be a valid input: " << e.what() << '\n';
+    }
+
+
+
+}
 
 
 void testSubMatrixValid() {
@@ -250,7 +354,31 @@ void testSubMatrixValid() {
 
 }
 
+void testSubMatrixValidSabeer() {
+    int subvalid_row = 2, subvalid_col = 2;
 
+
+	  int row=5,col=5;
+      int data[5][5] = {{2,2,2,5,5},{6,6,6,9,9},{0,0,0,2,2},{4,4,4,5,5},{9,9,9,3,3}};
+	  int*input_data[5];
+	  for (int i=0;i<5;i++){
+	    	input_data[i]=data[i];
+	  }
+	  Matrix f =  Matrix(row,col,input_data);
+
+		string row1="2 2 2 \n", row2="6 6 6 \n", row3="0 0 0 \n";
+		string expected=row1+row2+row3;
+
+		try{
+			Matrix y = f.subMatrix(subvalid_row,subvalid_col);
+			ASSERT_EQUAL(expected,y.toString());
+		}
+		catch (std::out_of_range& e){
+			std::cerr << "supposed to be a valid input: " << e.what() << '\n';
+		}
+
+
+}
 
 void testSubMatrixInvalid() {
 
@@ -300,6 +428,24 @@ void testIsUpperTrTrue() {
 
 }
 
+void testIsUpperTrTrueSabeer() {
+		//test isUpperTr()
+
+
+	  int row=5,col=4;
+      int upper1[5][4] = {{2,2,2,5},{0,6,6,9},{0,0,1,2},{0,0,0,5},{0,0,0,0}};
+	  int*input_upper1[5];
+	  for (int i=0;i<5;i++){
+	    	input_upper1[i]=upper1[i];
+	  }
+	  Matrix v =  Matrix(row,col,input_upper1);
+
+
+
+    bool expected = true;
+    ASSERT_EQUAL(expected,v.isUpperTr());
+
+}
 
 void testIsUpperTrFalse() {
 
@@ -364,6 +510,14 @@ bool runAllTests(int argc, char const *argv[]) {
 	s.push_back(CUTE(testIsUpperTrFalseNotSquare));
 
 	//TODO add your test here
+	s.push_back(CUTE(testConstructor1ValidSabeer));
+	s.push_back(CUTE(testConstructor2Sabeer));
+	s.push_back(CUTE(testGetElementValidSabeer));
+	s.push_back(CUTE(testSetElementValidSabeer));
+	s.push_back(CUTE(testCopySabeer));
+	s.push_back(CUTE(testAddToValidSabeer));
+	s.push_back(CUTE(testSubMatrixValidSabeer));
+	s.push_back(CUTE(testIsUpperTrTrueSabeer));
 
 	cute::xml_file_opener xmlfile(argc, argv);
 	cute::xml_listener<cute::ide_listener<>> lis(xmlfile.out);
