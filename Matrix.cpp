@@ -92,7 +92,7 @@ Matrix::Matrix(int row, int col, int** table){
 int Matrix::getElement(int i, int j){
 	if(i > colsNum || j > colsNum || i < 0 || j < 0) //verifies range of invalid values
 	{
-		throw std::out_of_range("Invalid indexes");
+		throw std::out_of_range("Invalid indexes.");
 			return -1;
 	}
 		return matrixData[i][j]; //returns specified element
